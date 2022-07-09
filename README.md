@@ -1,6 +1,6 @@
 # NX18
 Summary:  
-http://robotakao.jp/NX15/e/index.html  
+http://blog.robotakao.jp/blog-entry-469.html
   
   
 [Controll with macOS app]  
