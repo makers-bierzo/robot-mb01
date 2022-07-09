@@ -10,7 +10,7 @@ http://blog.robotakao.jp/blog-entry-469.html
 [Controll with Dabble]  
 &emsp;M5Atom sketch : NX18_control_dabble.ino  
 
-[Inverse Kinematic Excel calculation] 
+[Inverse Kinematic Excel calculation]   
 &emsp;NX18_IK_FWD.xlsm  
 &emsp;NX18_IK_Back.xlsm  
 &emsp;NX18_IK_RightTurn.xlsm  
