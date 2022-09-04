@@ -20,7 +20,7 @@ float L1 = 70;
 float L2 = 70;
 float L0 = 9.7;
 
-float H0 = 90; //Height
+float H0 = 80; //Height
 float Zc = 31.5; //Half Width
 float Nee = 5;
 float Ankle = 20;
@@ -36,8 +36,7 @@ float Tn = 10; //Turn
 int direction_flag = 0;
 
 // Base Step
-int bs_s[27][13]={
-  {0,0,0,0,0,0,0,0,0,0,0,0,0},
+int bs_s[26][13]={
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -179,9 +178,9 @@ void base_right_up_step(float Turn, float FS0, float FS1, float S2)
   {0, H0, Dis-Ss*sin(pi/2), FS1*sin(pi/2), H0-Adj, Dis+Ss*sin(pi/2)},
   {-FS1/2*(1-cos(pi/6)), H0, Dis-Ss*sin(pi/3), FS1/2*(1+cos(pi/6)), H0-Adj, Dis+Ss*cos(pi/6)},
   {-FS1/2*(1-cos(pi/3)), H0, Dis-Ss*sin(pi/6), FS1/2*(1+cos(pi/3)), H0-Adj, Dis+Ss*cos(pi/3)},
-  {-FS1/2*(1-cos(pi/2)), H0, Dis, FS1/2*(1+cos(pi/2)), H0, Dis+Ss*cos(pi/2)}};
+  {-FS1/2*(1-cos(pi/2)), H0, Dis, FS1/2*(1+cos(pi/2)), H0, Dis}};
   
-  for (int i=0; i <=26 ; i++){
+  for (int i=0; i <=25 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
   }
 
@@ -237,7 +236,7 @@ void base_left_up_step(float Turn, float FS0, float FS1, float S2)
   {FS1/2*(1+cos(pi/3)), H0-Adj, Dis+Ss*cos(pi/3), -FS1/2*(1-cos(pi/3)), H0, Dis-Ss*sin(pi/6)},
   {FS1/2*(1+cos(pi/2)), H0, Dis+Ss*cos(pi/2), -FS1/2*(1-cos(pi/2)), H0, Dis}};
   
-  for (int i=0; i <=26 ; i++){
+  for (int i=0; i <=25 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
   }
 

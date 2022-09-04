@@ -17,7 +17,7 @@ int ang0[13];
 int ang1[13];
 int ang_b[13];
 char ang_c[13];
-float ts=30;  //20msごとに次のステップに移る
+float ts=20;  //20msごとに次のステップに移る
 float td=10;   //10回で分割
 
 float L1 = 70;
@@ -40,8 +40,7 @@ float Tn = 10; //Turn
 int direction_flag = 0;
 
 // Base Step
-int bs_s[27][13]={
-  {0,0,0,0,0,0,0,0,0,0,0,0,0},
+int bs_s[26][13]={
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -152,7 +151,7 @@ void servo_init_set()
 
 void base_stay()
 {
-  float bs_s_init_ik[6]={0, H0, Dis, 0, H0, Dis+Ss*cos(pi/2)};
+  float bs_s_init_ik[6]={0, H0, Dis, 0, H0, Dis};
 
   ik(&bs_s_init_ik[0], &bs_s_init_ik[1], &bs_s_init_ik[2], &bs_s_init_ik[3], &bs_s_init_ik[4], &bs_s_init_ik[5], &bs_s[0][1], &bs_s[0][2], &bs_s[0][3], &bs_s[0][4], &bs_s[0][5], &bs_s[0][7], &bs_s[0][8], &bs_s[0][9], &bs_s[0][10], &bs_s[0][11]);
 
@@ -161,7 +160,6 @@ void base_stay()
   }
   servo_set();
 }
-
 
 void base_right_up_step(float Turn, float FS0, float FS1, float S2)
 {
@@ -191,9 +189,9 @@ void base_right_up_step(float Turn, float FS0, float FS1, float S2)
   {0, H0, Dis-Ss*sin(pi/2), FS1*sin(pi/2), H0-Adj, Dis+Ss*sin(pi/2)},
   {-FS1/2*(1-cos(pi/6)), H0, Dis-Ss*sin(pi/3), FS1/2*(1+cos(pi/6)), H0-Adj, Dis+Ss*cos(pi/6)},
   {-FS1/2*(1-cos(pi/3)), H0, Dis-Ss*sin(pi/6), FS1/2*(1+cos(pi/3)), H0-Adj, Dis+Ss*cos(pi/3)},
-  {-FS1/2*(1-cos(pi/2)), H0, Dis, FS1/2*(1+cos(pi/2)), H0, Dis+Ss*cos(pi/2)}};
+  {-FS1/2*(1-cos(pi/2)), H0, Dis, FS1/2*(1+cos(pi/2)), H0, Dis}};
   
-  for (int i=0; i <=26 ; i++){
+  for (int i=0; i <=25 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
   }
 
@@ -247,9 +245,9 @@ void base_left_up_step(float Turn, float FS0, float FS1, float S2)
   {FS1*sin(pi/2), H0-Adj, Dis+Ss*sin(pi/2),0, H0, Dis-Ss*sin(pi/2)},
   {FS1/2*(1+cos(pi/6)), H0-Adj, Dis+Ss*cos(pi/6), -FS1/2*(1-cos(pi/6)), H0, Dis-Ss*sin(pi/3)},
   {FS1/2*(1+cos(pi/3)), H0-Adj, Dis+Ss*cos(pi/3), -FS1/2*(1-cos(pi/3)), H0, Dis-Ss*sin(pi/6)},
-  {FS1/2*(1+cos(pi/2)), H0, Dis+Ss*cos(pi/2), -FS1/2*(1-cos(pi/2)), H0, Dis}};
+  {FS1/2*(1+cos(pi/2)), H0, Dis, -FS1/2*(1-cos(pi/2)), H0, Dis}};
   
-  for (int i=0; i <=26 ; i++){
+  for (int i=0; i <=25 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
   }
 
@@ -291,7 +289,7 @@ void base_left_up_stop(float FS1, float S2)
   {0, H0, Dis-Ss*sin(pi/2), 0, H0-Adj, Dis+Ss*sin(pi/2)},
   {0, H0, Dis-Ss*sin(pi/3), 0, H0-Adj, Dis+Ss*cos(pi/6)},
   {0, H0, Dis-Ss*sin(pi/6), 0, H0-Adj, Dis+Ss*cos(pi/3)},
-  {0, H0, Dis, 0, H0, Dis+Ss*cos(pi/2)}};
+  {0, H0, Dis, 0, H0, Dis}};
   
   for (int i=0; i <=12 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
@@ -322,7 +320,7 @@ void base_right_up_stop(float FS1, float S2)
   {0, H0-Adj, Dis+Ss*sin(pi/2),0, H0, Dis-Ss*sin(pi/2)},
   {0, H0-Adj, Dis+Ss*cos(pi/6), 0, H0, Dis-Ss*sin(pi/3)},
   {0, H0-Adj, Dis+Ss*cos(pi/3), 0, H0, Dis-Ss*sin(pi/6)},
-  {0, H0, Dis+Ss*cos(pi/2), 0, H0, Dis}};
+  {0, H0, Dis, 0, H0, Dis}};
   
   for (int i=0; i <=12 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
@@ -756,5 +754,4 @@ void loop()
       }
     }
   }
-  base_stay();
 } 

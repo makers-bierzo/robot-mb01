@@ -49,8 +49,7 @@ float CenZ = 0; //CenterZ
 int direction_flag = 0;
 
 // Base Step
-int bs_s[27][13]={
-  {0,0,0,0,0,0,0,0,0,0,0,0,0},
+int bs_s[26][13]={
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -161,7 +160,7 @@ void servo_init_set()
 
 void base_stay()
 {
-  float bs_s_init_ik[6]={-CenX, H0, Dis-CenZ, -CenX, H0, Dis+Ss*cos(pi/2)+CenZ};
+  float bs_s_init_ik[6]={-CenX, H0, Dis-CenZ, -CenX, H0, Dis+CenZ};
 
   ik(&bs_s_init_ik[0], &bs_s_init_ik[1], &bs_s_init_ik[2], &bs_s_init_ik[3], &bs_s_init_ik[4], &bs_s_init_ik[5], &bs_s[0][1], &bs_s[0][2], &bs_s[0][3], &bs_s[0][4], &bs_s[0][5], &bs_s[0][7], &bs_s[0][8], &bs_s[0][9], &bs_s[0][10], &bs_s[0][11]);
 
@@ -185,8 +184,8 @@ void base_right_up_step(float Turn, float FS0, float FS1, float S2)
   {FS1*sin(pi/2)*2/3-CenX, H0-Up*sin(pi/6)-CenZ, Dis+Ss+S2, -CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
   {FS1*sin(pi/2)-CenX, H0-Adj, Dis+Ss*sin(pi/2)-CenZ, -CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
   {FS1/2*(1+cos(pi/6))-CenX, H0-Adj, Dis+Ss*cos(pi/6)+S2-CenZ, -FS1/2*(1-cos(pi/6))-CenX, H0, Dis-Ss*sin(pi/3)+CenZ},
-  {FS1/2*(1+cos(pi/3))-CenX, H0-Adj, Dis+Ss*cos(pi/3)+S2-CenZ, -FS1/2*(1-cos(pi/3))-CenX, H0, Dis-Ss*sin(pi/6)},
-  {FS1/2*(1+cos(pi/2))-CenX, H0, Dis+S2/2-CenZ, -FS1/2*(1-cos(pi/2))-CenX, H0, Dis+S2/2},
+  {FS1/2*(1+cos(pi/3))-CenX, H0-Adj, Dis+Ss*cos(pi/3)+S2-CenZ, -FS1/2*(1-cos(pi/3))-CenX, H0, Dis-Ss*sin(pi/6)+CenZ},
+  {FS1/2*(1+cos(pi/2))-CenX, H0, Dis+S2/2-CenZ, -FS1/2*(1-cos(pi/2))-CenX, H0, Dis+S2/2+CenZ},
   {FS1/2*(1+cos(pi*2/3))-CenX, H0, Dis+Ss*cos(pi*2/3)-CenZ, -FS1/2*(1-cos(pi*2/3))-CenX, H0, Dis+Ss*cos(pi/3)+S2+CenZ},
   {FS1/2*(1+cos(pi*5/6))-CenX, H0, Dis+Ss*cos(pi*5/6)-CenZ, -FS1/2*(1-cos(pi*5/6))-CenX, H0, Dis+Ss*cos(pi/6)+S2+CenZ},
   {FS1/2*(1+cos(pi))-CenX, H0, Dis+Ss*cos(pi)-CenZ, -FS1/2*(1-cos(pi))-CenX, H0, Dis+Ss*sin(pi/2)+S2+CenZ},
@@ -199,9 +198,9 @@ void base_right_up_step(float Turn, float FS0, float FS1, float S2)
   {-CenX, H0, Dis-Ss*sin(pi/2)-CenZ, FS1*sin(pi/2)-CenX, H0-Adj, Dis+Ss*sin(pi/2)+CenZ},
   {-FS1/2*(1-cos(pi/6))-CenX, H0, Dis-Ss*sin(pi/3)-CenZ, FS1/2*(1+cos(pi/6))-CenX, H0-Adj, Dis+Ss*cos(pi/6)+CenZ},
   {-FS1/2*(1-cos(pi/3))-CenX, H0, Dis-Ss*sin(pi/6)-CenZ, FS1/2*(1+cos(pi/3))-CenX, H0-Adj, Dis+Ss*cos(pi/3)+CenZ},
-  {-FS1/2*(1-cos(pi/2))-CenX, H0, Dis-CenZ, FS1/2*(1+cos(pi/2))-CenX, H0, Dis+Ss*cos(pi/2)+CenZ}};
+  {-FS1/2*(1-cos(pi/2))-CenX, H0, Dis-CenZ, FS1/2*(1+cos(pi/2))-CenX, H0, Dis+CenZ}};
   
-  for (int i=0; i <=26 ; i++){
+  for (int i=0; i <=25 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
   }
 
@@ -231,7 +230,7 @@ void base_left_up_step(float Turn, float FS0, float FS1, float S2)
 {
   float bs_s_ik[26][6]={
   {FS0/2*(1+cos(pi*2/3))-CenX, H0, Dis+Ss*cos(pi*2/3)-CenZ, -FS0/2*(1-cos(pi*2/3))-CenX, H0, Dis+Ss*cos(pi/3)+CenZ},
-  {FS0/2*(1+cos(pi*5/6))-CenX, H0, Dis+Ss*cos(pi*5/6)-CenZ -FS0/2*(1-cos(pi*5/6))-CenX, H0, Dis+Ss*cos(pi/6)+CenZ},
+  {FS0/2*(1+cos(pi*5/6))-CenX, H0, Dis+Ss*cos(pi*5/6)-CenZ, -FS0/2*(1-cos(pi*5/6))-CenX, H0, Dis+Ss*cos(pi/6)+CenZ},
   {FS0/2*(1+cos(pi))-CenX, H0, Dis+Ss*cos(pi)-CenZ, -FS0/2*(1-cos(pi))-CenX, H0, Dis+Ss*sin(pi/2)+CenZ},
   {-CenX, H0, Dis+Ss*cos(pi)-CenZ, -FS0/2*(1-cos(pi))-CenX, H0-Adj, Dis+Ss+CenZ},
   {-CenX, H0, Dis+Ss*cos(pi)-CenZ, -FS0*sin(pi/2)*2/3-CenX, H0-Up*sin(pi/6), Dis+Ss+CenZ},
@@ -249,7 +248,7 @@ void base_left_up_step(float Turn, float FS0, float FS1, float S2)
   {-FS1/2*(1-cos(pi))-CenX, H0-Adj, Dis+Ss+S2-CenZ,-CenX, H0, Dis+Ss*cos(pi)+CenZ},
   {-FS1*sin(pi/2)*2/3-CenX, H0-Up*sin(pi/6), Dis+Ss+S2-CenZ,-CenX, H0, Dis+Ss*cos(pi)+CenZ},
   {-FS1*sin(pi/2)/3-CenX, H0-Up*sin(pi/3), Dis+Ss+S2-CenZ,-CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
-  {-CenX, H0-Up*sin(pi/2)-CenX, Dis+Ss-CenZ,-CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
+  {-CenX, H0-Up*sin(pi/2), Dis+Ss-CenZ,-CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
   {FS1*sin(pi/2)/3-CenX, H0-Up*sin(pi/3), Dis+Ss-CenZ,-CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
   {FS1*sin(pi/2)*2/3-CenX, H0-Up*sin(pi/6), Dis+Ss-CenZ,-CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
   {FS1*sin(pi/2)-CenX, H0-Adj, Dis+Ss*sin(pi/2)-CenZ,-CenX, H0, Dis-Ss*sin(pi/2)+CenZ},
@@ -257,7 +256,7 @@ void base_left_up_step(float Turn, float FS0, float FS1, float S2)
   {FS1/2*(1+cos(pi/3))-CenX, H0-Adj, Dis+Ss*cos(pi/3)-CenZ, -FS1/2*(1-cos(pi/3))-CenX, H0, Dis-Ss*sin(pi/6)+CenZ},
   {FS1/2*(1+cos(pi/2))-CenX, H0, Dis+Ss*cos(pi/2)-CenZ, -FS1/2*(1-cos(pi/2))-CenX, H0, Dis+CenZ}};
   
-  for (int i=0; i <=26 ; i++){
+  for (int i=0; i <=25 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
   }
 
@@ -299,7 +298,7 @@ void base_left_up_stop(float FS1, float S2)
   {-CenX, H0, Dis-Ss*sin(pi/2)-CenZ, -CenX, H0-Adj, Dis+Ss*sin(pi/2)+CenZ},
   {-CenX, H0, Dis-Ss*sin(pi/3)-CenZ, -CenX, H0-Adj, Dis+Ss*cos(pi/6)+CenZ},
   {-CenX, H0, Dis-Ss*sin(pi/6)-CenZ, -CenX, H0-Adj, Dis+Ss*cos(pi/3)+CenZ},
-  {-CenX, H0, Dis-CenZ, -CenX, H0, Dis+Ss*cos(pi/2)}};
+  {-CenX, H0, Dis-CenZ, -CenX, H0, Dis+Ss*cos(pi/2)+CenZ}};
   
   for (int i=0; i <=12 ; i++){
     ik(&bs_s_ik[i][0], &bs_s_ik[i][1], &bs_s_ik[i][2], &bs_s_ik[i][3], &bs_s_ik[i][4], &bs_s_ik[i][5], &bs_s[i][1], &bs_s[i][2], &bs_s[i][3], &bs_s[i][4], &bs_s[i][5], &bs_s[i][7], &bs_s[i][8], &bs_s[i][9], &bs_s[i][10], &bs_s[i][11]);
@@ -816,5 +815,7 @@ void loop()
       }
     }
   }
-  base_stay();
+  if(direction_flag == 0){
+    base_stay();
+  }
 }
