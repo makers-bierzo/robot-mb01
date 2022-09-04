@@ -11,13 +11,13 @@ English http://robotakao.jp/NX18/e/index.html
 [Controll with Dabble]  
 &emsp;M5Atom sketch : NX18_control_dabble.ino 
 
-[Inverse Kinematic]
+[Inverse Kinematic]   
 &emsp;M5Atom sketch : NX18_control_dabble_ik.ino
 
-[Ultra Sonic Distance Sensor]
+[Ultra Sonic Distance Sensor]  
 &emsp;M5Atom sketch : NX18_control_Sonic_dabble_ik.ino
 
-[IMU]
+[IMU]  
 &emsp;M5Atom sketch : NX18_control_IMU_Sonic_dabble_ik.ino
 
 [Inverse Kinematic Excel calculation]   
