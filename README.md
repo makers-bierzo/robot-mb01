@@ -1,7 +1,7 @@
 # NX18
 Summary:  
-Japanese http://robotakao.jp/NX18/index.html  
-English http://robotakao.jp/NX18/e/index.html
+Japanese http://robotakao.web.fc2.com/NX18/index.html  
+English http://robotakao.web.fc2.com/NX18/e/index.html
   
   
 [Controll with macOS app]  
