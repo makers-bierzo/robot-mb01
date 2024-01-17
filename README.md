@@ -1,4 +1,4 @@
-# NX18
+# ROBOT-MB01
 Summary:  
 Japanese http://robotakao.web.fc2.com/NX18/index.html  
 English http://robotakao.web.fc2.com/NX18/e/index.html
